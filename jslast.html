@@ -1,0 +1,161 @@
+<html>
+    <head>
+
+    </head>
+    <style>
+        body{
+            margin: 0;
+        }
+        .image-slider{
+            position: relative;
+            width: 100%;
+            height: 100%;
+            background-image: url(10.jpg);
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+        }
+
+        .caption{
+            position: absolute;
+            top: 0;
+            left: 0;
+            text-align: center;
+            background: rgba(0,0,0,0.5);
+            color: white;
+        }
+        .arrow-left, .arrow-right{
+            position: absolute;
+            top: 45%;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background-color: white;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        
+        }
+        .arrow-left{
+            left: 5px;
+        }
+        .arrow-right{
+            right: 5px;
+        }
+        #popup{
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            display: none;
+            background-color: rgba(0,0,0,0.5);
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            z-index: 9999;
+        }
+        .popup-content{
+            text-align: center;
+            max-width: 250px;
+            background-color: white;
+            padding: 10px;
+        }
+        #closeBtn{
+            margin-top: 10px;
+        }
+
+         .show{
+            display: flex !important;
+            opacity: 1 !important;
+        }
+
+
+      
+    </style>
+    <body>
+
+        <div class="popup" id="popup">
+            <div class="popup-content">
+                <h2>Mobil programimizi yukleyin</h2>
+               <a href="https://www.apple.com/az/app-store/" target="_blank"><img src="app.png" alt="" id="app" width="60px"></a> 
+                <a href="https://play.google.com/store/games?hl=en&gl=US" target="_blank"><img src="download.png" alt="" id="google" width="60px"></a>
+                <button id="closeBtn">Close</button>
+            </div>
+        </div>
+
+        <div class="image-slider">
+            <div class="arrow-left">
+                <i class="fa-sharp fa-solid fa-arrow-left"></i>
+            </div>
+            <div class="arrow-right">
+                <i class="fa-solid fa-arrow-right"></i>
+            </div>
+            <div class="caption">
+                <h2>10.Unitedhealthcare Group</h2>
+                <p>Qurulub: 1977, market deyeri:493 milyard $</p>
+            </div>
+        </div>
+
+        
+          
+
+
+        <script src="https://kit.fontawesome.com/bee4baa89a.js" crossorigin="anonymous"></script> 
+        <script>
+           const slider = document.querySelector('.image-slider');
+           const arrleft = document.querySelector('.arrow-left');
+           const arrright = document.querySelector('.arrow-right');
+
+           const head = document.querySelector('.caption h2');
+           const desc = document.querySelector('.caption p');
+
+           const images = ['10.jpg','9.jpeg','8.jpg','7.jpg','6.jpg','5.jpg','4.jpg','3.jpg','2.jpg','1.jpg'];
+           const heads = ['10.Unitedhealthcare Group','9.Berkshire Hathaway Inc','8.Saudi Aramco','7.Tesla Inc','6.Alibaba Group','5.Facebook Inc','4.Google Inc','3.Amazon Inc','2.Microsoft Inc','1.Apple Inc'];
+           const descs = [' Qurulub 1977, Market deyeri 493 milyard ',' Qurulub 1839, Market deyeri 614 milyard ',' Qurulub:1933, Market deyeri:2.33 trilyon $',' Qurulub:2003, Market deyeri:910 milyard $','Qurulub:1999, Market deyeri:916 milyard $','Qurulub:2004, Market deyeri: 394 milyard $','Qurulub:1998, Market deyeri: 1.33 trilyon $','Qurulub:1994, Market deyeri: 1.43 trilyon $','Qurulub:1975, Market deyeri:2.1 trilyon $','Qurulub:1976, Market deyeri: 2.65 trilyon $'];
+             
+           var id =0;
+
+           function slide(id){
+            slider.style.backgroundImage = 'url(' + images[id]+ ')';
+            head.textContent = heads[id];
+            desc.textContent = descs[id];
+           }
+
+           arrleft.addEventListener('click',function(){
+            id--;
+            if(id<0){
+                id= images.length -1;
+            }
+
+            slide(id);
+           })
+
+           arrright.addEventListener('click',function(){
+            id++;
+
+            if(id>=images.length){
+                id=0;
+            };
+
+            slide(id);
+
+           })
+
+           window.onload = function(){
+            let popup = document.querySelector('.popup');
+            let closeBtn = document.querySelector('#closeBtn');
+            var checkpopup = localStorage.getItem('check')
+            if(checkpopup != 'true'){
+            popup.classList.add('show');
+            };
+            closeBtn.addEventListener('click',function(){
+                popup.classList.remove('show');
+                localStorage.setItem('check','true');
+            })
+
+           }
+        </script>
+          
+    </body>
+</html>
